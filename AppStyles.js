@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 
 const AppStyles = StyleSheet.create({
   container: {
-    height: "100%",
+    flex: 1,
+    // height: "100%",
   },
   header: {
     backgroundColor: "white",

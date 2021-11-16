@@ -6,35 +6,47 @@ const BoxesStyles = StyleSheet.create({
   },
   name: {
     flex: 0.2,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "center",
+  },
+  btns_start: {
+    flex: 0.15,
   },
   boxs: {
-    flex: 0.7,
+    flex: 0.65,
   },
   box1: {
     width: "40%",
     height: "100%",
     position: "absolute",
-    left: "4vw",
+    left: "4%",
   },
   box2: {
     width: "40%",
     height: "100%",
     position: "absolute",
-    right: "4vw",
+    right: "4%",
+  },
+  view_images: {
+    width: "100%",
+    height: "100%",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    borderColor: "black",
+    borderWidth: 5,
+    borderRadius: 10,
+  },
+  view_image: {
+    width: "33.3%",
+    height: "33.3%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
-    width: "10vw",
-    height: "10vw",
+    width: "70%",
+    height: "70%",
   },
   view_gif: {
     width: "100%",
     height: "100%",
-    // flex: 0.7,
-    // backgroundColor: "black",
     zIndex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -42,22 +54,11 @@ const BoxesStyles = StyleSheet.create({
   gif: {
     width: "50%",
     height: "100%",
+    zIndex: 2,
   },
   ImageBackground: {
     width: "100%",
     height: "100%",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    borderRadius: "2vw",
-    border: "2px solid black",
-  },
-  point: {
-    width: "10%",
-    height: "100%",
-    position: "absolute",
-    left: "45%",
   },
 });
 export default BoxesStyles;
