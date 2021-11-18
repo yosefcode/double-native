@@ -9,11 +9,7 @@ import {
 } from "react-native";
 import SettingStyles from "./settingStyles";
 import Logo from "../boxes/logo/logo";
-import {
-  Ionicons,
-  FontAwesome5,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 
 function Setting({
   setting,
@@ -26,18 +22,6 @@ function Setting({
   setHardTimer,
   timer,
   setTimer,
-  error_Point,
-  setError_Point,
-  success_Point,
-  setSuccess_Point,
-  listBox2,
-  setListBox2,
-  listBox1,
-  setListBox1,
-  gifSuccess,
-  setGifSuccess,
-  gifError,
-  setGifError,
   intervalval,
   setIntervalval,
   startError,
@@ -56,7 +40,12 @@ function Setting({
   end,
   error,
   success,
+  valBtnStart,
+  setValBtnStart,
 }) {
+  const [error_Timer, setError_Timer] = useState(0);
+  const [error_Numfor, setError_Numfor] = useState(0);
+
   return (
     <View style={SettingStyles.container}>
       <ImageBackground
@@ -69,78 +58,156 @@ function Setting({
           <Logo />
         </View>
 
-        <Ionicons name="hourglass-outline" size={70} color="white" />
-        <TouchableOpacity
-          onPress={() => {
-            setHardTimer(10);
-            setTimer(10);
-          }}
-        >
-          <Text
-            style={{
-              backgroundColor: "white",
-              width: 50,
-              height: 50,
-              borderRadius: 50,
-              fontWeight: "700",
-              fontSize: 40,
-              // justifyContent: "center",
-              // alignItems: "center",
-              textAlign: "center",
+        <View style={SettingStyles.timer}>
+          <Image
+            style={SettingStyles.gif}
+            source={require("./stopwatch.gif")}
+            resizeMode="contain"
+          />
+
+          <View style={SettingStyles.btns_timer}>
+            <View
+              style={{ opacity: hardTimer === 10 || hardTimer === 0 ? 1 : 0.4 }}
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  setHardTimer(10);
+                  setTimer(10);
+                  setError_Timer(0);
+                }}
+                style={[
+                  SettingStyles.btn_timer,
+                  { borderColor: "red", borderWidth: error_Timer },
+                ]}
+              >
+                <Text style={SettingStyles.txt_timer}>10</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View
+              style={{ opacity: hardTimer === 20 || hardTimer === 0 ? 1 : 0.4 }}
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  setHardTimer(20);
+                  setTimer(20);
+                  setError_Timer(0);
+                }}
+                style={[
+                  SettingStyles.btn_timer,
+                  { borderColor: "red", borderWidth: error_Timer },
+                ]}
+              >
+                <Text style={SettingStyles.txt_timer}>20</Text>
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{ opacity: hardTimer === 30 || hardTimer === 0 ? 1 : 0.4 }}
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  setHardTimer(30);
+                  setTimer(30);
+                  setError_Timer(0);
+                }}
+                style={[
+                  SettingStyles.btn_timer,
+                  { borderColor: "red", borderWidth: error_Timer },
+                ]}
+              >
+                <Text style={SettingStyles.txt_timer}>30</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+
+        <View style={SettingStyles.num_card}>
+          <TouchableOpacity
+            onPress={() => {
+              setNumfor(9);
+              setSmall_large("33.3%");
+              end();
+              setError_Numfor(0);
+              setValBtnStart("Start");
+              // setSuccess_Point(0);
+              // setError_Point(0);
             }}
+            style={SettingStyles.btn_img_box}
           >
-            10
-          </Text>
-        </TouchableOpacity>
-        <FontAwesome5 name="stopwatch" size={60} color="white" />
-        <MaterialCommunityIcons name="dice-d10" size={60} color="white" />
-        <TouchableOpacity
-          onPress={() => {
-            setHardTimer(20);
-            setTimer(20);
-          }}
-        >
-          <Text>20</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            setHardTimer(30);
-            setTimer(30);
-          }}
-        >
-          <Text>30</Text>
-        </TouchableOpacity>
+            <View
+              style={{
+                opacity: numfor === 9 || numfor === 0 ? 1 : 0.4,
+                borderColor: "red",
+                borderWidth: error_Numfor,
+                borderRadius: 15,
+              }}
+            >
+              <Image
+                style={SettingStyles.img_box}
+                source={require("./img-easy.png")}
+                resizeMode="contain"
+              />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setNumfor(16);
+              setSmall_large("25%");
+              end();
+              setError_Numfor(0);
+              setValBtnStart("Start");
+              // setSuccess_Point(0);
+              // setError_Point(0);
+            }}
+            style={SettingStyles.btn_img_box}
+          >
+            <View
+              style={{
+                opacity: numfor === 16 || numfor === 0 ? 1 : 0.4,
+                borderColor: "red",
+                borderWidth: error_Numfor,
+                borderRadius: 15,
+              }}
+            >
+              <Image
+                style={SettingStyles.img_box}
+                source={require("./16img.png")}
+                resizeMode="contain"
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity
-          onPress={() => {
-            setNumfor(9);
-            setSmall_large("boxsmall");
-            end();
-            // setSuccess_Point(0);
-            // setError_Point(0);
-          }}
-        >
-          <Text> 9</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            setNumfor(16);
-            setSmall_large("boxsmall");
-            end();
+        <View style={SettingStyles.gling}>
+          <Ionicons name="notifications" size={120} color="white" />
+          {/* <Ionicons name="notifications-off" size={30} color="white" /> */}
+        </View>
 
-            // setSuccess_Point(0);
-            // setError_Point(0);
-          }}
+        <View
+          style={[
+            SettingStyles.view_btn_play,
+            { opacity: hardTimer < 5 || numfor < 5 ? 0.5 : 1 },
+          ]}
         >
-          <Text> 16</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            setSetting(false);
-          }}
-        >
-          <Text> 1דגד6</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (hardTimer < 5) {
+                setError_Timer(3);
+              }
+              if (numfor < 5) {
+                setError_Numfor(3);
+              }
+              if (numfor > 5 && hardTimer > 5) {
+                setSetting(false);
+              }
+            }}
+            style={SettingStyles.btn_play}
+          >
+            <Text style={{ fontSize: 20, fontWeight: "700" }}> PLAY</Text>
+            <AntDesign name="doubleleft" size={24} color="black" />
+            <AntDesign name="doubleleft" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
     </View>
   );

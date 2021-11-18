@@ -35,8 +35,12 @@ const BoxesStyles = StyleSheet.create({
     borderRadius: 10,
   },
   view_image: {
-    width: "33.3%",
-    height: "33.3%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  view_image_16: {
+    width: "25%",
+    height: "25%",
     justifyContent: "center",
     alignItems: "center",
   },

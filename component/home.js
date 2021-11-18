@@ -5,11 +5,11 @@ import Setting from "./setting/setting";
 
 function Home() {
   const [setting, setSetting] = useState(true);
-  const [numfor, setNumfor] = useState(9);
+  const [numfor, setNumfor] = useState(0);
   const [small_large, setSmall_large] = useState("boxsmall");
   // const [audioSuccess] = useState(new Audio("sound/success.mp3"));
   // const [audioError] = useState(new Audio("sound/error.mp3"));
-  const [hardTimer, setHardTimer] = useState(10);
+  const [hardTimer, setHardTimer] = useState(0);
   const [timer, setTimer] = useState(0);
   const [success_Point, setSuccess_Point] = useState(0);
   const [error_Point, setError_Point] = useState(0);
@@ -22,6 +22,7 @@ function Home() {
   const [disable, setDisable] = useState(false);
   const [disablePause, setDisablePause] = useState(true);
   const [valBtnPause, setValBtnPause] = useState("Pause");
+  const [valBtnStart, setValBtnStart] = useState("Start");
 
   const imageNames = [
     require("../img/1.png"),
@@ -110,22 +111,16 @@ function Home() {
   }, [timer, setTimer]);
 
   const start = () => {
-    if (numfor > 5 && timer > 0) {
-      setDisable(false);
-      clear_Interval();
-      setSuccess_Point(0);
-      setError_Point(0);
-      loadBox1();
-      loadBox2();
-      setTimer(hardTimer);
-      startInterval();
-      setDisablePause(false);
-    } else {
-      setStartError(true);
-      setTimeout(function () {
-        setStartError(false);
-      }, 3000);
-    }
+    setDisable(false);
+    clear_Interval();
+    setSuccess_Point(0);
+    setError_Point(0);
+    loadBox1();
+    loadBox2();
+    setTimer(hardTimer);
+    startInterval();
+    setDisablePause(false);
+    setValBtnStart("New Game");
   };
   const end = () => {
     setDisablePause(true);
@@ -198,20 +193,6 @@ function Home() {
     setListBox2(box2);
   };
 
-  // const createThreeButtonAlert = () =>
-  //   Alert.alert("Alert Title", "My Alert Msg", [
-  //     {
-  //       text: "Ask me later",
-  //       onPress: () => console.log("Ask me later pressed"),
-  //     },
-  //     {
-  //       text: "Cancel",
-  //       onPress: () => console.log("Cancel Pressed"),
-  //       style: "cancel",
-  //     },
-  //     { text: "OK", onPress: () => console.log("OK Pressed") },
-  //   ]);
-
   return (
     <View style={{ flex: 1 }}>
       {setting ? (
@@ -256,6 +237,8 @@ function Home() {
           error={error}
           clear_Interval={clear_Interval}
           startInterval={startInterval}
+          valBtnStart={valBtnStart}
+          setValBtnStart={setValBtnStart}
         />
       ) : (
         <Boxes
@@ -299,6 +282,8 @@ function Home() {
           error={error}
           clear_Interval={clear_Interval}
           startInterval={startInterval}
+          valBtnStart={valBtnStart}
+          setValBtnStart={setValBtnStart}
         />
       )}
     </View>

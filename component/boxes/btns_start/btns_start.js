@@ -40,6 +40,8 @@ function BtnsStart(props) {
     setDisablePause,
     valBtnPause,
     setValBtnPause,
+    valBtnStart,
+    setValBtnStart,
   } = props;
   return (
     <View style={btns_startStyles.container}>
@@ -51,7 +53,7 @@ function BtnsStart(props) {
           start();
         }}
       >
-        <Text>New Game</Text>
+        <Text>{valBtnStart}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -60,7 +62,7 @@ function BtnsStart(props) {
           if (disable === false) {
             clear_Interval();
             setDisable(true);
-            setValBtnPause("המשך משחק");
+            setValBtnPause("Start");
           } else {
             setValBtnPause("Pause");
             setDisable(false);

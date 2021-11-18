@@ -5,7 +5,7 @@ import logoStyles from "./logoStyles";
 import AppLoading from "expo-app-loading";
 import { useFonts, Lobster_400Regular } from "@expo-google-fonts/lobster";
 
-function Logo({ setSetting }) {
+function Logo({ setSetting, clear_Interval, setDisable, setValBtnPause }) {
   let [fontsLoaded] = useFonts({
     Lobster_400Regular,
   });
@@ -13,83 +13,92 @@ function Logo({ setSetting }) {
     return <AppLoading />;
   } else {
     return (
-      <View style={logoStyles.name}>
-        <TouchableOpacity
-          onPress={() => {
-            setSetting(true);
-          }}
-        >
-          <Ionicons name="md-settings" size={30} color="white" />
-        </TouchableOpacity>
+      <View style={logoStyles.headr}>
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              setSetting(true);
+              clear_Interval();
+              setDisable(true);
+              setValBtnPause("Start");
+            }}
+          >
+            <Ionicons name="md-settings" size={30} color="white" />
+          </TouchableOpacity>
+        </View>
 
-        <Text
-          style={{
-            fontFamily: "Lobster_400Regular",
-            color: "red",
-            fontSize: 45,
-            // fontWeight: "700",
-          }}
-        >
-          {" "}
-          E{" "}
-        </Text>
-        <Text
-          style={{
-            fontFamily: "Lobster_400Regular",
-            color: "yellow",
-            fontSize: 45,
-            // fontWeight: "700",
-          }}
-        >
-          {" "}
-          L{" "}
-        </Text>
-        <Text
-          style={{
-            fontFamily: "Lobster_400Regular",
-            color: "green",
-            fontSize: 45,
-            // fontWeight: "700",
-          }}
-        >
-          {" "}
-          B{" "}
-        </Text>
-        <Text
-          style={{
-            fontFamily: "Lobster_400Regular",
-            color: "red",
-            fontSize: 45,
-            // fontWeight: "700",
-          }}
-        >
-          {" "}
-          U{" "}
-        </Text>
-        <Text
-          style={{
-            fontFamily: "Lobster_400Regular",
-            color: "yellow",
-            fontSize: 45,
-            // fontWeight: "700",
-          }}
-        >
-          {" "}
-          O{" "}
-        </Text>
-        <Text
-          style={{
-            fontFamily: "Lobster_400Regular",
-            color: "green",
-            fontSize: 45,
-            // fontWeight: "700",
-          }}
-        >
-          {" "}
-          D{" "}
-        </Text>
-        <Ionicons name="notifications" size={30} color="white" />
-        <Ionicons name="notifications-off" size={30} color="white" />
+        <View style={logoStyles.logo}>
+          <Text
+            style={{
+              fontFamily: "Lobster_400Regular",
+              color: "red",
+              fontSize: 45,
+              // fontWeight: "700",
+            }}
+          >
+            {" "}
+            E{" "}
+          </Text>
+          <Text
+            style={{
+              fontFamily: "Lobster_400Regular",
+              color: "yellow",
+              fontSize: 45,
+              // fontWeight: "700",
+            }}
+          >
+            {" "}
+            L{" "}
+          </Text>
+          <Text
+            style={{
+              fontFamily: "Lobster_400Regular",
+              color: "green",
+              fontSize: 45,
+              // fontWeight: "700",
+            }}
+          >
+            {" "}
+            B{" "}
+          </Text>
+          <Text
+            style={{
+              fontFamily: "Lobster_400Regular",
+              color: "red",
+              fontSize: 45,
+              // fontWeight: "700",
+            }}
+          >
+            {" "}
+            U{" "}
+          </Text>
+          <Text
+            style={{
+              fontFamily: "Lobster_400Regular",
+              color: "yellow",
+              fontSize: 45,
+              // fontWeight: "700",
+            }}
+          >
+            {" "}
+            O{" "}
+          </Text>
+          <Text
+            style={{
+              fontFamily: "Lobster_400Regular",
+              color: "green",
+              fontSize: 45,
+              // fontWeight: "700",
+            }}
+          >
+            {" "}
+            D{" "}
+          </Text>
+        </View>
+        <View>
+          <Ionicons name="notifications" size={30} color="white" />
+          {/* <Ionicons name="notifications-off" size={30} color="white" /> */}
+        </View>
       </View>
     );
   }

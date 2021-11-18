@@ -52,6 +52,8 @@ function Boxes({
   end,
   error,
   success,
+  valBtnStart,
+  setValBtnStart,
 }) {
   const testBox1 = (imgClick) => {
     const foundBox2 = listBox2.find((images) => images === imgClick);
@@ -69,10 +71,14 @@ function Boxes({
         source={require("../../img/background.png")}
         resizeMode="cover"
         style={BoxesStyles.ImageBackground}
-        // imageStyle={{ opacity: 0.9 }}
       >
         <View style={BoxesStyles.name}>
-          <Logo setSetting={setSetting} />
+          <Logo
+            setSetting={setSetting}
+            clear_Interval={clear_Interval}
+            setDisable={setDisable}
+            setValBtnPause={setValBtnPause}
+          />
         </View>
 
         <View style={BoxesStyles.boxs}>
@@ -96,7 +102,6 @@ function Boxes({
             </View>
           )}
 
-          {/* <Button title={"2-Button Alert"} onPress={createThreeButtonAlert} /> */}
           <View style={BoxesStyles.box1}>
             <ImageBackground
               source={require("./old_map.png")}
@@ -114,7 +119,11 @@ function Boxes({
                       key={index}
                       style={[
                         BoxesStyles.view_image,
-                        { opacity: disable ? 0.3 : 1 },
+                        {
+                          opacity: disable ? 0.3 : 1,
+                          width: small_large,
+                          height: small_large,
+                        },
                       ]}
                       disabled={disable}
                     >
@@ -154,7 +163,11 @@ function Boxes({
                       key={index}
                       style={[
                         BoxesStyles.view_image,
-                        { opacity: disable ? 0.3 : 1 },
+                        {
+                          opacity: disable ? 0.3 : 1,
+                          width: small_large,
+                          height: small_large,
+                        },
                       ]}
                       disabled={disable}
                     >
@@ -185,6 +198,8 @@ function Boxes({
             setDisablePause={setDisablePause}
             valBtnPause={valBtnPause}
             setValBtnPause={setValBtnPause}
+            valBtnStart={valBtnStart}
+            setValBtnStart={setValBtnStart}
           />
         </View>
       </ImageBackground>
