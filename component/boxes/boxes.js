@@ -7,9 +7,10 @@ import {
   Alert,
 } from "react-native";
 import BoxesStyles from "./boxesStyles";
-import Point_Timer from "../point_timer/point_timer";
+import Point_Timer from "./point_timer/point_timer";
 import Logo from "./logo/logo";
 import BtnsStart from "./btns_start/btns_start";
+import { useKeepAwake } from "expo-keep-awake";
 
 function Boxes({
   setting,
@@ -44,8 +45,8 @@ function Boxes({
   setDisablePause,
   valBtnPause,
   setValBtnPause,
-  // audioError,
-  // audioSuccess,
+  mute,
+  setMute,
   start,
   clear_Interval,
   startInterval,
@@ -55,6 +56,8 @@ function Boxes({
   valBtnStart,
   setValBtnStart,
 }) {
+  useKeepAwake();
+
   const testBox1 = (imgClick) => {
     const foundBox2 = listBox2.find((images) => images === imgClick);
     foundBox2 ? success() : error();
@@ -78,6 +81,8 @@ function Boxes({
             clear_Interval={clear_Interval}
             setDisable={setDisable}
             setValBtnPause={setValBtnPause}
+            mute={mute}
+            setMute={setMute}
           />
         </View>
 

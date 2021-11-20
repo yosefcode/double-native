@@ -53,7 +53,7 @@ function BtnsStart(props) {
           start();
         }}
       >
-        <Text>{valBtnStart}</Text>
+        <Text style={btns_startStyles.text}>{valBtnStart}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -70,9 +70,8 @@ function BtnsStart(props) {
           }
         }}
         disabled={disablePause}
-        // style={{ opacity: 1 }}
       >
-        <Text> {valBtnPause}</Text>
+        <Text style={btns_startStyles.text}> {valBtnPause}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -80,7 +79,7 @@ function BtnsStart(props) {
         onPress={() => end()}
         disabled={disablePause}
       >
-        <Text>End Game</Text>
+        <Text style={btns_startStyles.text}>End Game</Text>
       </TouchableOpacity>
     </View>
   );

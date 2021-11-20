@@ -8,7 +8,7 @@ import Point_TimerStyles from "./point_timerStyles";
 
 function Point_Timer({ timer, success_Point, error_Point }) {
   let [fontsLoaded] = useFonts({
-    digital: require("../../assets/digital.ttf"),
+    digital: require("../../../assets/digital.ttf"),
   });
   if (!fontsLoaded) {
     return <AppLoading />;

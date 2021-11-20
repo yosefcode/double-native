@@ -5,7 +5,14 @@ import logoStyles from "./logoStyles";
 import AppLoading from "expo-app-loading";
 import { useFonts, Lobster_400Regular } from "@expo-google-fonts/lobster";
 
-function Logo({ setSetting, clear_Interval, setDisable, setValBtnPause }) {
+function Logo({
+  setSetting,
+  clear_Interval,
+  setDisable,
+  setValBtnPause,
+  mute,
+  setMute,
+}) {
   let [fontsLoaded] = useFonts({
     Lobster_400Regular,
   });
@@ -96,8 +103,17 @@ function Logo({ setSetting, clear_Interval, setDisable, setValBtnPause }) {
           </Text>
         </View>
         <View>
-          <Ionicons name="notifications" size={30} color="white" />
-          {/* <Ionicons name="notifications-off" size={30} color="white" /> */}
+          <TouchableOpacity
+            onPress={() => {
+              mute === true ? setMute(false) : setMute(true);
+            }}
+          >
+            {mute === true ? (
+              <Ionicons name="notifications-off" size={30} color="white" />
+            ) : (
+              <Ionicons name="notifications" size={30} color="white" />
+            )}
+          </TouchableOpacity>
         </View>
       </View>
     );

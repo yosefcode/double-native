@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import Boxes from "./boxes/boxes";
 import Setting from "./setting/setting";
+import { Audio } from "expo-av";
 
 function Home() {
   const [setting, setSetting] = useState(true);
   const [numfor, setNumfor] = useState(0);
   const [small_large, setSmall_large] = useState("boxsmall");
-  // const [audioSuccess] = useState(new Audio("sound/success.mp3"));
-  // const [audioError] = useState(new Audio("sound/error.mp3"));
   const [hardTimer, setHardTimer] = useState(0);
   const [timer, setTimer] = useState(0);
   const [success_Point, setSuccess_Point] = useState(0);
@@ -23,6 +22,21 @@ function Home() {
   const [disablePause, setDisablePause] = useState(true);
   const [valBtnPause, setValBtnPause] = useState("Pause");
   const [valBtnStart, setValBtnStart] = useState("Start");
+  const [mute, setMute] = useState(false);
+
+  async function playSoundSuccess() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("./sound/success.mp3")
+    );
+    await sound.playAsync();
+  }
+
+  async function playSoundError() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("./sound/error.mp3")
+    );
+    await sound.playAsync();
+  }
 
   const imageNames = [
     require("../img/1.png"),
@@ -145,7 +159,7 @@ function Home() {
       setGifSuccess(false);
       startInterval();
     }, 2000);
-    // audioSuccess.play();
+    !mute ? playSoundSuccess() : null;
   };
 
   const error = () => {
@@ -159,7 +173,7 @@ function Home() {
       setGifError(false);
       startInterval();
     }, 2000);
-    // audioError.play();
+    !mute ? playSoundError() : null;
   };
 
   var same = imageNames[Math.floor(Math.random() * imageNames.length)];
@@ -229,8 +243,6 @@ function Home() {
           setDisablePause={setDisablePause}
           valBtnPause={valBtnPause}
           setValBtnPause={setValBtnPause}
-          // audioError={audioError}
-          // audioSuccess={audioSuccess}
           start={start}
           end={end}
           success={success}
@@ -239,6 +251,8 @@ function Home() {
           startInterval={startInterval}
           valBtnStart={valBtnStart}
           setValBtnStart={setValBtnStart}
+          mute={mute}
+          setMute={setMute}
         />
       ) : (
         <Boxes
@@ -274,8 +288,6 @@ function Home() {
           setDisablePause={setDisablePause}
           valBtnPause={valBtnPause}
           setValBtnPause={setValBtnPause}
-          // audioError={audioError}
-          // audioSuccess={audioSuccess}
           start={start}
           end={end}
           success={success}
@@ -284,6 +296,8 @@ function Home() {
           startInterval={startInterval}
           valBtnStart={valBtnStart}
           setValBtnStart={setValBtnStart}
+          mute={mute}
+          setMute={setMute}
         />
       )}
     </View>

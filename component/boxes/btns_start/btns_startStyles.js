@@ -16,5 +16,9 @@ const btns_startStyles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 50,
   },
+  text: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
 });
 export default btns_startStyles;

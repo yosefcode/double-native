@@ -8,7 +8,7 @@ import {
   Text,
 } from "react-native";
 import SettingStyles from "./settingStyles";
-import Logo from "../boxes/logo/logo";
+import Logo from "./logo/logo";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 
 function Setting({
@@ -32,8 +32,8 @@ function Setting({
   setDisablePause,
   valBtnPause,
   setValBtnPause,
-  // audioError,
-  // audioSuccess,
+  mute,
+  setMute,
   start,
   clear_Interval,
   startInterval,
@@ -76,7 +76,7 @@ function Setting({
                   setError_Timer(0);
                 }}
                 style={[
-                  SettingStyles.btn_timer,
+                  SettingStyles.btn_timer_up,
                   { borderColor: "red", borderWidth: error_Timer },
                 ]}
               >
@@ -94,7 +94,7 @@ function Setting({
                   setError_Timer(0);
                 }}
                 style={[
-                  SettingStyles.btn_timer,
+                  SettingStyles.btn_timer_down,
                   { borderColor: "red", borderWidth: error_Timer },
                 ]}
               >
@@ -111,7 +111,7 @@ function Setting({
                   setError_Timer(0);
                 }}
                 style={[
-                  SettingStyles.btn_timer,
+                  SettingStyles.btn_timer_up,
                   { borderColor: "red", borderWidth: error_Timer },
                 ]}
               >
@@ -179,8 +179,17 @@ function Setting({
         </View>
 
         <View style={SettingStyles.gling}>
-          <Ionicons name="notifications" size={120} color="white" />
-          {/* <Ionicons name="notifications-off" size={30} color="white" /> */}
+          <TouchableOpacity
+            onPress={() => {
+              mute === true ? setMute(false) : setMute(true);
+            }}
+          >
+            {mute === true ? (
+              <Ionicons name="notifications-off" size={60} color="white" />
+            ) : (
+              <Ionicons name="notifications" size={60} color="white" />
+            )}
+          </TouchableOpacity>
         </View>
 
         <View
@@ -189,6 +198,23 @@ function Setting({
             { opacity: hardTimer < 5 || numfor < 5 ? 0.5 : 1 },
           ]}
         >
+          <View
+            onPress={() => {
+              if (hardTimer < 5) {
+                setError_Timer(3);
+              }
+              if (numfor < 5) {
+                setError_Numfor(3);
+              }
+              if (numfor > 5 && hardTimer > 5) {
+                console.log("hhhh");
+              }
+            }}
+            style={SettingStyles.btn_play}
+          >
+            <Text style={{ fontSize: 20, fontWeight: "700" }}>remmber my</Text>
+          </View>
+
           <TouchableOpacity
             onPress={() => {
               if (hardTimer < 5) {
