@@ -1,48 +1,26 @@
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  Image,
-  TouchableOpacity,
-  ImageBackground,
-  Alert,
-} from "react-native";
+import React from "react";
+import { View, Image, TouchableOpacity, ImageBackground } from "react-native";
 import BoxesStyles from "./boxesStyles";
 import Point_Timer from "./point_timer/point_timer";
 import Logo from "./logo/logo";
 import BtnsStart from "./btns_start/btns_start";
 import { useKeepAwake } from "expo-keep-awake";
+import { Shadow } from "react-native-shadow-2";
 
 function Boxes({
-  setting,
   setSetting,
-  numfor,
-  setNumfor,
   small_large,
-  setSmall_large,
-  hardTimer,
-  setHardTimer,
   timer,
-  setTimer,
   error_Point,
-  setError_Point,
   success_Point,
-  setSuccess_Point,
   listBox2,
-  setListBox2,
   listBox1,
-  setListBox1,
   gifSuccess,
-  setGifSuccess,
   gifError,
-  setGifError,
-  intervalval,
   setIntervalval,
-  startError,
-  setStartError,
   disable,
   setDisable,
   disablePause,
-  setDisablePause,
   valBtnPause,
   setValBtnPause,
   mute,
@@ -54,7 +32,9 @@ function Boxes({
   error,
   success,
   valBtnStart,
-  setValBtnStart,
+  animatedTiming,
+  clearTimeoutAnimation,
+  animation,
 }) {
   useKeepAwake();
 
@@ -83,6 +63,9 @@ function Boxes({
             setValBtnPause={setValBtnPause}
             mute={mute}
             setMute={setMute}
+            animatedTiming={animatedTiming}
+            clearTimeoutAnimation={clearTimeoutAnimation}
+            animation={animation}
           />
         </View>
 
@@ -108,41 +91,48 @@ function Boxes({
           )}
 
           <View style={BoxesStyles.box1}>
-            <ImageBackground
-              source={require("./old_map.png")}
-              resizeMode="stretch"
-              style={BoxesStyles.ImageBackground}
-              imageStyle={{ borderRadius: 10 }}
+            <Shadow
+              distance={20}
+              startColor={"#8c8c8c"}
+              // finalColor={"#ffffff"}
+              offset={[0, 0]}
             >
-              <View style={BoxesStyles.view_images}>
-                {listBox1.map((imgClick, index) => {
-                  return (
-                    <TouchableOpacity
-                      onPress={() => {
-                        testBox1(imgClick);
-                      }}
-                      key={index}
-                      style={[
-                        BoxesStyles.view_image,
-                        {
-                          opacity: disable ? 0.3 : 1,
-                          width: small_large,
-                          height: small_large,
-                        },
-                      ]}
-                      disabled={disable}
-                    >
-                      <Image
-                        style={BoxesStyles.image}
-                        key={imgClick}
-                        source={imgClick}
-                        resizeMode="contain"
-                      />
-                    </TouchableOpacity>
-                  );
-                })}
-              </View>
-            </ImageBackground>
+              <ImageBackground
+                source={require("./old_map.png")}
+                resizeMode="stretch"
+                style={BoxesStyles.ImageBackground}
+                imageStyle={{ borderRadius: 10 }}
+              >
+                <View style={BoxesStyles.view_images}>
+                  {listBox1.map((imgClick, index) => {
+                    return (
+                      <TouchableOpacity
+                        onPress={() => {
+                          testBox1(imgClick);
+                        }}
+                        key={index}
+                        style={[
+                          BoxesStyles.view_image,
+                          {
+                            opacity: disable ? 0.3 : 1,
+                            width: small_large,
+                            height: small_large,
+                          },
+                        ]}
+                        disabled={disable}
+                      >
+                        <Image
+                          style={BoxesStyles.image}
+                          key={imgClick}
+                          source={imgClick}
+                          resizeMode="contain"
+                        />
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              </ImageBackground>
+            </Shadow>
           </View>
 
           <Point_Timer
@@ -152,41 +142,48 @@ function Boxes({
           />
 
           <View style={BoxesStyles.box2}>
-            <ImageBackground
-              source={require("./old_map.png")}
-              resizeMode="stretch"
-              style={BoxesStyles.ImageBackground}
-              imageStyle={{ borderRadius: 10 }}
+            <Shadow
+              distance={20}
+              startColor={"#8c8c8c"}
+              // finalColor={"#ffffff"}
+              offset={[0, 0]}
             >
-              <View style={BoxesStyles.view_images}>
-                {listBox2.map((imgClick, index) => {
-                  return (
-                    <TouchableOpacity
-                      onPress={() => {
-                        testBox2(imgClick);
-                      }}
-                      key={index}
-                      style={[
-                        BoxesStyles.view_image,
-                        {
-                          opacity: disable ? 0.3 : 1,
-                          width: small_large,
-                          height: small_large,
-                        },
-                      ]}
-                      disabled={disable}
-                    >
-                      <Image
-                        style={BoxesStyles.image}
-                        key={imgClick}
-                        source={imgClick}
-                        resizeMode="contain"
-                      />
-                    </TouchableOpacity>
-                  );
-                })}
-              </View>
-            </ImageBackground>
+              <ImageBackground
+                source={require("./old_map.png")}
+                resizeMode="stretch"
+                style={BoxesStyles.ImageBackground}
+                imageStyle={{ borderRadius: 10 }}
+              >
+                <View style={BoxesStyles.view_images}>
+                  {listBox2.map((imgClick, index) => {
+                    return (
+                      <TouchableOpacity
+                        onPress={() => {
+                          testBox2(imgClick);
+                        }}
+                        key={index}
+                        style={[
+                          BoxesStyles.view_image,
+                          {
+                            opacity: disable ? 0.3 : 1,
+                            width: small_large,
+                            height: small_large,
+                          },
+                        ]}
+                        disabled={disable}
+                      >
+                        <Image
+                          style={BoxesStyles.image}
+                          key={imgClick}
+                          source={imgClick}
+                          resizeMode="contain"
+                        />
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              </ImageBackground>
+            </Shadow>
           </View>
         </View>
 
@@ -200,11 +197,9 @@ function Boxes({
             disable={disable}
             setDisable={setDisable}
             disablePause={disablePause}
-            setDisablePause={setDisablePause}
             valBtnPause={valBtnPause}
             setValBtnPause={setValBtnPause}
             valBtnStart={valBtnStart}
-            setValBtnStart={setValBtnStart}
           />
         </View>
       </ImageBackground>

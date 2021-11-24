@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { View, Animated, StatusBar } from "react-native";
 import Boxes from "./boxes/boxes";
 import Setting from "./setting/setting";
 import { Audio } from "expo-av";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Home() {
   const [setting, setSetting] = useState(true);
@@ -23,20 +24,8 @@ function Home() {
   const [valBtnPause, setValBtnPause] = useState("Pause");
   const [valBtnStart, setValBtnStart] = useState("Start");
   const [mute, setMute] = useState(false);
-
-  async function playSoundSuccess() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("./sound/success.mp3")
-    );
-    await sound.playAsync();
-  }
-
-  async function playSoundError() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("./sound/error.mp3")
-    );
-    await sound.playAsync();
-  }
+  const [animation, setAnimation] = useState(new Animated.Value(0));
+  const [timeoutAnimation, setTimeoutAnimation] = useState();
 
   const imageNames = [
     require("../img/1.png"),
@@ -100,6 +89,39 @@ function Home() {
     require("../img/60.png"),
   ];
 
+  const TimeoutAnimation = () => {
+    var timeout = setTimeout(() => {
+      setAnimation(new Animated.Value(0));
+    }, 10000);
+    setTimeoutAnimation(timeout);
+  };
+
+  const clearTimeoutAnimation = () => {
+    clearTimeout(timeoutAnimation);
+  };
+
+  const animatedTiming = () => {
+    Animated.timing(animation, {
+      toValue: 100,
+      duration: 10000,
+      useNativeDriver: false,
+    }).start();
+    TimeoutAnimation();
+  };
+
+  async function playSoundSuccess() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("./sound/success.mp3")
+    );
+    await sound.playAsync();
+  }
+
+  async function playSoundError() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("./sound/error.mp3")
+    );
+    await sound.playAsync();
+  }
   const startInterval = () => {
     var interval = setInterval(() => {
       setTimer((timer) => timer - 1);
@@ -159,7 +181,9 @@ function Home() {
       setGifSuccess(false);
       startInterval();
     }, 2000);
-    !mute ? playSoundSuccess() : null;
+    if (!mute) {
+      playSoundSuccess();
+    }
   };
 
   const error = () => {
@@ -173,7 +197,9 @@ function Home() {
       setGifError(false);
       startInterval();
     }, 2000);
-    !mute ? playSoundError() : null;
+    if (!mute) {
+      playSoundError();
+    }
   };
 
   var same = imageNames[Math.floor(Math.random() * imageNames.length)];
@@ -208,96 +234,54 @@ function Home() {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, marginTop: 0 }}>
+      <StatusBar hidden={true} />
       {setting ? (
         <Setting
-          setting={setting}
           setSetting={setSetting}
           numfor={numfor}
           setNumfor={setNumfor}
-          small_large={small_large}
           setSmall_large={setSmall_large}
           hardTimer={hardTimer}
           setHardTimer={setHardTimer}
-          timer={timer}
           setTimer={setTimer}
-          error_Point={error_Point}
-          setError_Point={setError_Point}
-          success_Point={success_Point}
-          setSuccess_Point={setSuccess_Point}
-          listBox2={listBox2}
-          setListBox2={setListBox2}
-          listBox1={listBox1}
-          setListBox1={setListBox1}
-          gifSuccess={gifSuccess}
-          setGifSuccess={setGifSuccess}
-          gifError={gifError}
-          setGifError={setGifError}
-          intervalval={intervalval}
-          setIntervalval={setIntervalval}
-          startError={startError}
-          setStartError={setStartError}
-          disable={disable}
-          setDisable={setDisable}
-          disablePause={disablePause}
-          setDisablePause={setDisablePause}
-          valBtnPause={valBtnPause}
-          setValBtnPause={setValBtnPause}
-          start={start}
-          end={end}
-          success={success}
-          error={error}
-          clear_Interval={clear_Interval}
-          startInterval={startInterval}
-          valBtnStart={valBtnStart}
-          setValBtnStart={setValBtnStart}
           mute={mute}
           setMute={setMute}
+          end={end}
+          setValBtnStart={setValBtnStart}
+          animatedTiming={animatedTiming}
+          clearTimeoutAnimation={clearTimeoutAnimation}
+          animation={animation}
         />
       ) : (
         <Boxes
-          setting={setting}
           setSetting={setSetting}
-          numfor={numfor}
-          setNumfor={setNumfor}
           small_large={small_large}
-          setSmall_large={setSmall_large}
-          hardTimer={hardTimer}
-          setHardTimer={setHardTimer}
           timer={timer}
-          setTimer={setTimer}
           error_Point={error_Point}
-          setError_Point={setError_Point}
           success_Point={success_Point}
-          setSuccess_Point={setSuccess_Point}
           listBox2={listBox2}
-          setListBox2={setListBox2}
           listBox1={listBox1}
-          setListBox1={setListBox1}
           gifSuccess={gifSuccess}
-          setGifSuccess={setGifSuccess}
           gifError={gifError}
-          setGifError={setGifError}
-          intervalval={intervalval}
           setIntervalval={setIntervalval}
-          startError={startError}
-          setStartError={setStartError}
           disable={disable}
           setDisable={setDisable}
           disablePause={disablePause}
-          setDisablePause={setDisablePause}
           valBtnPause={valBtnPause}
           setValBtnPause={setValBtnPause}
+          mute={mute}
+          setMute={setMute}
           start={start}
+          clear_Interval={clear_Interval}
+          startInterval={startInterval}
           end={end}
           success={success}
           error={error}
-          clear_Interval={clear_Interval}
-          startInterval={startInterval}
           valBtnStart={valBtnStart}
-          setValBtnStart={setValBtnStart}
-          mute={mute}
-          setMute={setMute}
+          animatedTiming={animatedTiming}
+          clearTimeoutAnimation={clearTimeoutAnimation}
+          animation={animation}
         />
       )}
     </View>

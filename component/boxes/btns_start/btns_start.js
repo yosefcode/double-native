@@ -1,34 +1,10 @@
-import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  ImageBackground,
-  StyleSheet,
-  Alert,
-  Button,
-} from "react-native";
+import React from "react";
+import { Text, View, TouchableOpacity } from "react-native";
 
 import btns_startStyles from "./btns_startStyles";
 
 function BtnsStart(props) {
   const {
-    numfor,
-    audioSuccess,
-    audioError,
-    small_large,
-    timer,
-    setTimer,
-    hardTimer,
-    setHardTimer,
-    success_Point,
-    setSuccess_Point,
-    error_Point,
-    setError_Point,
-    point,
-    setpoint,
     setIntervalval,
     start,
     clear_Interval,
@@ -37,11 +13,9 @@ function BtnsStart(props) {
     disable,
     setDisable,
     disablePause,
-    setDisablePause,
     valBtnPause,
     setValBtnPause,
     valBtnStart,
-    setValBtnStart,
   } = props;
   return (
     <View style={btns_startStyles.container}>

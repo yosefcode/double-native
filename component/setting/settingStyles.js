@@ -19,7 +19,7 @@ const SettingStyles = StyleSheet.create({
     alignItems: "center",
   },
   btns_timer: {
-    marginTop: 15,
+    marginTop: -80,
     width: "70%",
     display: "flex",
     flexDirection: "row",
@@ -36,9 +36,9 @@ const SettingStyles = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
     transform: [{ rotate: "45deg" }],
-    bottom: "100%",
   },
   btn_timer_down: {
+    marginTop: 90,
     backgroundColor: "white",
     width: 45,
     height: 45,

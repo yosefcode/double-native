@@ -1,50 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Image,
   TouchableOpacity,
   ImageBackground,
-  Alert,
   Text,
 } from "react-native";
 import SettingStyles from "./settingStyles";
 import Logo from "./logo/logo";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Setting({
-  setting,
   setSetting,
   numfor,
   setNumfor,
-  small_large,
   setSmall_large,
   hardTimer,
   setHardTimer,
-  timer,
   setTimer,
-  intervalval,
-  setIntervalval,
-  startError,
-  setStartError,
-  disable,
-  setDisable,
-  disablePause,
-  setDisablePause,
-  valBtnPause,
-  setValBtnPause,
   mute,
   setMute,
-  start,
-  clear_Interval,
-  startInterval,
   end,
-  error,
-  success,
-  valBtnStart,
   setValBtnStart,
+  animatedTiming,
+  clearTimeoutAnimation,
+  animation,
 }) {
   const [error_Timer, setError_Timer] = useState(0);
   const [error_Numfor, setError_Numfor] = useState(0);
+
+  // const setStorage = async () => {
+  //   try {
+  //     const setStorage = JSON.stringify({
+  //       hardTimer: hardTimer,
+  //       numfor: numfor,
+  //       mute: mute,
+  //     });
+  //     await AsyncStorage.setItem("setting", setStorage);
+  //     const setting = await AsyncStorage.getItem("setting");
+  //     console.log(JSON.parse(setting));
+  //   } catch (e) {
+  //     // saving error
+  //   }
+  // };
 
   return (
     <View style={SettingStyles.container}>
@@ -52,10 +51,9 @@ function Setting({
         source={require("../../img/background.png")}
         resizeMode="cover"
         style={SettingStyles.ImageBackground}
-        // imageStyle={{ opacity: 0.9 }}
       >
         <View style={SettingStyles.name}>
-          <Logo />
+          <Logo animatedTiming={animatedTiming} animation={animation} />
         </View>
 
         <View style={SettingStyles.timer}>
@@ -129,8 +127,6 @@ function Setting({
               end();
               setError_Numfor(0);
               setValBtnStart("Start");
-              // setSuccess_Point(0);
-              // setError_Point(0);
             }}
             style={SettingStyles.btn_img_box}
           >
@@ -156,8 +152,6 @@ function Setting({
               end();
               setError_Numfor(0);
               setValBtnStart("Start");
-              // setSuccess_Point(0);
-              // setError_Point(0);
             }}
             style={SettingStyles.btn_img_box}
           >
@@ -198,22 +192,22 @@ function Setting({
             { opacity: hardTimer < 5 || numfor < 5 ? 0.5 : 1 },
           ]}
         >
-          <View
+          {/* <TouchableOpacity
             onPress={() => {
-              if (hardTimer < 5) {
-                setError_Timer(3);
-              }
-              if (numfor < 5) {
-                setError_Numfor(3);
-              }
-              if (numfor > 5 && hardTimer > 5) {
-                console.log("hhhh");
-              }
+              // if (hardTimer < 5) {
+              //   setError_Timer(3);
+              // }
+              // if (numfor < 5) {
+              //   setError_Numfor(3);
+              // }
+              // if (numfor > 5 && hardTimer > 5) {
+              setStorage();
+              // }
             }}
             style={SettingStyles.btn_play}
           >
             <Text style={{ fontSize: 20, fontWeight: "700" }}>remmber my</Text>
-          </View>
+          </TouchableOpacity> */}
 
           <TouchableOpacity
             onPress={() => {
@@ -225,6 +219,7 @@ function Setting({
               }
               if (numfor > 5 && hardTimer > 5) {
                 setSetting(false);
+                clearTimeoutAnimation();
               }
             }}
             style={SettingStyles.btn_play}

@@ -4,7 +4,6 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { Text, View } from "react-native";
 import Point_TimerStyles from "./point_timerStyles";
-// import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
 function Point_Timer({ timer, success_Point, error_Point }) {
   let [fontsLoaded] = useFonts({
