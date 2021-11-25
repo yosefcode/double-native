@@ -18,7 +18,6 @@ function Home() {
   const [gifSuccess, setGifSuccess] = useState(false);
   const [intervalval, setIntervalval] = useState();
   const [gifError, setGifError] = useState(false);
-  const [startError, setStartError] = useState(false);
   const [disable, setDisable] = useState(false);
   const [disablePause, setDisablePause] = useState(true);
   const [valBtnPause, setValBtnPause] = useState("Pause");
@@ -235,7 +234,11 @@ function Home() {
 
   return (
     <View style={{ flex: 1, marginTop: 0 }}>
-      <StatusBar hidden={true} />
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+      />
       {setting ? (
         <Setting
           setSetting={setSetting}
