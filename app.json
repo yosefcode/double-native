@@ -18,7 +18,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.double_game"
+      "bundleIdentifier": "com.yosef9987.double_game"
     },
     "android": {
       "adaptiveIcon": {

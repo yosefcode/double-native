@@ -25,6 +25,7 @@ function Home() {
   const [mute, setMute] = useState(false);
   const [animation, setAnimation] = useState(new Animated.Value(0));
   const [timeoutAnimation, setTimeoutAnimation] = useState();
+  const [correctAnswer, setCorrectAnswer] = useState();
 
   const imageNames = [
     require("../img/1.png"),
@@ -141,6 +142,13 @@ function Home() {
 
   useEffect(() => {
     if (timer === -1) {
+      for (var a = 0; a < listBox2.length; a++) {
+        let testAnswer = listBox1.find((s) => s === listBox2[a]);
+        if (testAnswer) {
+          setCorrectAnswer(testAnswer);
+        }
+      }
+
       error();
     }
   }, [timer, setTimer]);
@@ -171,12 +179,13 @@ function Home() {
 
   const success = () => {
     setSuccess_Point(success_Point + 1);
-    loadBox1();
-    loadBox2();
     setTimer(hardTimer);
     clear_Interval();
     setGifSuccess(true);
     setTimeout(function () {
+      setCorrectAnswer();
+      loadBox1();
+      loadBox2();
       setGifSuccess(false);
       startInterval();
     }, 2000);
@@ -188,11 +197,12 @@ function Home() {
   const error = () => {
     setTimer(hardTimer);
     setError_Point(error_Point + 1);
-    loadBox1();
-    loadBox2();
     clear_Interval();
     setGifError(true);
     setTimeout(function () {
+      setCorrectAnswer();
+      loadBox1();
+      loadBox2();
       setGifError(false);
       startInterval();
     }, 2000);
@@ -285,6 +295,8 @@ function Home() {
           animatedTiming={animatedTiming}
           clearTimeoutAnimation={clearTimeoutAnimation}
           animation={animation}
+          correctAnswer={correctAnswer}
+          setCorrectAnswer={setCorrectAnswer}
         />
       )}
     </View>

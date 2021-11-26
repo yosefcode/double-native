@@ -58,7 +58,7 @@ const BoxesStyles = StyleSheet.create({
     alignItems: "center",
   },
   gif: {
-    width: "50%",
+    width: "20%",
     height: "100%",
     zIndex: 2,
   },

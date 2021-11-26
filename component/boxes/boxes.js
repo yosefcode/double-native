@@ -35,16 +35,31 @@ function Boxes({
   animatedTiming,
   clearTimeoutAnimation,
   animation,
+  setCorrectAnswer,
+  correctAnswer,
 }) {
   useKeepAwake();
 
   const testBox1 = (imgClick) => {
     const foundBox2 = listBox2.find((images) => images === imgClick);
+    for (var a = 0; a < listBox2.length; a++) {
+      let testAnswer = listBox1.find((s) => s === listBox2[a]);
+      if (testAnswer) {
+        setCorrectAnswer(testAnswer);
+      }
+    }
     foundBox2 ? success() : error();
   };
 
   const testBox2 = (imgClick) => {
     const foundBox1 = listBox1.find((images) => images === imgClick);
+    for (var a = 0; a < listBox2.length; a++) {
+      let testAnswer = listBox1.find((s) => s === listBox2[a]);
+      if (testAnswer) {
+        setCorrectAnswer(testAnswer);
+      }
+    }
+
     foundBox1 ? success() : error();
   };
 
@@ -118,15 +133,43 @@ function Boxes({
                             width: small_large,
                             height: small_large,
                           },
+                          imgClick === correctAnswer
+                            ? {
+                                borderColor: "red",
+                                borderWidth: 1,
+                                borderRadius: 15,
+                              }
+                            : { borderWidth: 0 },
                         ]}
                         disabled={disable}
                       >
-                        <Image
-                          style={BoxesStyles.image}
-                          key={imgClick}
-                          source={imgClick}
-                          resizeMode="contain"
-                        />
+                        {!correctAnswer ? (
+                          <Image
+                            style={BoxesStyles.image}
+                            key={imgClick}
+                            source={imgClick}
+                            resizeMode="contain"
+                          />
+                        ) : imgClick === correctAnswer ? (
+                          <Image
+                            style={BoxesStyles.image}
+                            key={imgClick}
+                            source={imgClick}
+                            resizeMode="contain"
+                          />
+                        ) : (
+                          <Image
+                            style={[
+                              BoxesStyles.image,
+                              {
+                                opacity: 0.3,
+                              },
+                            ]}
+                            key={imgClick}
+                            source={imgClick}
+                            resizeMode="contain"
+                          />
+                        )}
                       </TouchableOpacity>
                     );
                   })}
@@ -169,15 +212,43 @@ function Boxes({
                             width: small_large,
                             height: small_large,
                           },
+                          imgClick === correctAnswer
+                            ? {
+                                borderColor: "red",
+                                borderWidth: 1,
+                                borderRadius: 15,
+                              }
+                            : { borderWidth: 0 },
                         ]}
                         disabled={disable}
                       >
-                        <Image
-                          style={BoxesStyles.image}
-                          key={imgClick}
-                          source={imgClick}
-                          resizeMode="contain"
-                        />
+                        {!correctAnswer ? (
+                          <Image
+                            style={BoxesStyles.image}
+                            key={imgClick}
+                            source={imgClick}
+                            resizeMode="contain"
+                          />
+                        ) : imgClick === correctAnswer ? (
+                          <Image
+                            style={BoxesStyles.image}
+                            key={imgClick}
+                            source={imgClick}
+                            resizeMode="contain"
+                          />
+                        ) : (
+                          <Image
+                            style={[
+                              BoxesStyles.image,
+                              {
+                                opacity: 0.3,
+                              },
+                            ]}
+                            key={imgClick}
+                            source={imgClick}
+                            resizeMode="contain"
+                          />
+                        )}
                       </TouchableOpacity>
                     );
                   })}
