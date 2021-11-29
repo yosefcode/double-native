@@ -26,6 +26,7 @@ function Home() {
   const [animation, setAnimation] = useState(new Animated.Value(0));
   const [timeoutAnimation, setTimeoutAnimation] = useState();
   const [correctAnswer, setCorrectAnswer] = useState();
+  const [animationImage, setAnimationImage] = useState(new Animated.Value(0));
 
   const imageNames = [
     require("../img/1.png"),
@@ -88,6 +89,14 @@ function Home() {
     require("../img/59.png"),
     require("../img/60.png"),
   ];
+
+  const animatedTimingImage = () => {
+    Animated.timing(animationImage, {
+      toValue: 1,
+      duration: 3000,
+      useNativeDriver: false,
+    }).start();
+  };
 
   const TimeoutAnimation = () => {
     var timeout = setTimeout(() => {
@@ -178,6 +187,7 @@ function Home() {
   };
 
   const success = () => {
+    animatedTimingImage();
     setSuccess_Point(success_Point + 1);
     setTimer(hardTimer);
     clear_Interval();
@@ -188,13 +198,15 @@ function Home() {
       loadBox2();
       setGifSuccess(false);
       startInterval();
-    }, 2000);
+      setAnimationImage(new Animated.Value(0));
+    }, 3000);
     if (!mute) {
       playSoundSuccess();
     }
   };
 
   const error = () => {
+    animatedTimingImage();
     setTimer(hardTimer);
     setError_Point(error_Point + 1);
     clear_Interval();
@@ -205,7 +217,8 @@ function Home() {
       loadBox2();
       setGifError(false);
       startInterval();
-    }, 2000);
+      setAnimationImage(new Animated.Value(0));
+    }, 3000);
     if (!mute) {
       playSoundError();
     }
@@ -297,6 +310,7 @@ function Home() {
           animation={animation}
           correctAnswer={correctAnswer}
           setCorrectAnswer={setCorrectAnswer}
+          animationImage={animationImage}
         />
       )}
     </View>

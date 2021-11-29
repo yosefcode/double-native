@@ -1,5 +1,11 @@
-import React from "react";
-import { View, Image, TouchableOpacity, ImageBackground } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+  Animated,
+} from "react-native";
 import BoxesStyles from "./boxesStyles";
 import Point_Timer from "./point_timer/point_timer";
 import Logo from "./logo/logo";
@@ -37,6 +43,7 @@ function Boxes({
   animation,
   setCorrectAnswer,
   correctAnswer,
+  animationImage,
 }) {
   useKeepAwake();
 
@@ -133,13 +140,6 @@ function Boxes({
                             width: small_large,
                             height: small_large,
                           },
-                          imgClick === correctAnswer
-                            ? {
-                                borderColor: "red",
-                                borderWidth: 1,
-                                borderRadius: 15,
-                              }
-                            : { borderWidth: 0 },
                         ]}
                         disabled={disable}
                       >
@@ -151,8 +151,26 @@ function Boxes({
                             resizeMode="contain"
                           />
                         ) : imgClick === correctAnswer ? (
-                          <Image
-                            style={BoxesStyles.image}
+                          <Animated.Image
+                            style={[
+                              BoxesStyles.image,
+                              {
+                                transform: [
+                                  {
+                                    scaleX: animationImage.interpolate({
+                                      inputRange: [0, 1],
+                                      outputRange: [1, 1.5],
+                                    }),
+                                  },
+                                  {
+                                    scaleY: animationImage.interpolate({
+                                      inputRange: [0, 1],
+                                      outputRange: [1, 1.5],
+                                    }),
+                                  },
+                                ],
+                              },
+                            ]}
                             key={imgClick}
                             source={imgClick}
                             resizeMode="contain"
@@ -162,7 +180,7 @@ function Boxes({
                             style={[
                               BoxesStyles.image,
                               {
-                                opacity: 0.3,
+                                opacity: 0.4,
                               },
                             ]}
                             key={imgClick}
@@ -212,13 +230,6 @@ function Boxes({
                             width: small_large,
                             height: small_large,
                           },
-                          imgClick === correctAnswer
-                            ? {
-                                borderColor: "red",
-                                borderWidth: 1,
-                                borderRadius: 15,
-                              }
-                            : { borderWidth: 0 },
                         ]}
                         disabled={disable}
                       >
@@ -230,8 +241,26 @@ function Boxes({
                             resizeMode="contain"
                           />
                         ) : imgClick === correctAnswer ? (
-                          <Image
-                            style={BoxesStyles.image}
+                          <Animated.Image
+                            style={[
+                              BoxesStyles.image,
+                              {
+                                transform: [
+                                  {
+                                    scaleX: animationImage.interpolate({
+                                      inputRange: [0, 1],
+                                      outputRange: [1, 1.5],
+                                    }),
+                                  },
+                                  {
+                                    scaleY: animationImage.interpolate({
+                                      inputRange: [0, 1],
+                                      outputRange: [1, 1.5],
+                                    }),
+                                  },
+                                ],
+                              },
+                            ]}
                             key={imgClick}
                             source={imgClick}
                             resizeMode="contain"
@@ -241,7 +270,7 @@ function Boxes({
                             style={[
                               BoxesStyles.image,
                               {
-                                opacity: 0.3,
+                                opacity: 0.4,
                               },
                             ]}
                             key={imgClick}
