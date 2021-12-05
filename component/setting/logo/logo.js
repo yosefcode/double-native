@@ -3,6 +3,10 @@ import { Text, View, Animated } from "react-native";
 import logoStyles from "./logoStyles";
 import AppLoading from "expo-app-loading";
 import { useFonts, Lobster_400Regular } from "@expo-google-fonts/lobster";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 function Logo({ animatedTiming, animation }) {
   useEffect(() => {
@@ -19,7 +23,7 @@ function Logo({ animatedTiming, animation }) {
       inputRange: [0, 20, 50, 80, 100],
       outputRange: ["yellow", "orange", "red", "orange", "yellow"],
     }),
-    fontSize: 100,
+    fontSize: hp("12%"),
   };
 
   if (!fontsLoaded) {
